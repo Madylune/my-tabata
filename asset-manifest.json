@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.js": "/my-tabata/static/js/main.ef2b9b7d.chunk.js",
+    "main.js.map": "/my-tabata/static/js/main.ef2b9b7d.chunk.js.map",
+    "runtime-main.js": "/my-tabata/static/js/runtime-main.04489472.js",
+    "runtime-main.js.map": "/my-tabata/static/js/runtime-main.04489472.js.map",
+    "static/js/2.739a5cd7.chunk.js": "/my-tabata/static/js/2.739a5cd7.chunk.js",
+    "static/js/2.739a5cd7.chunk.js.map": "/my-tabata/static/js/2.739a5cd7.chunk.js.map",
+    "index.html": "/my-tabata/index.html",
+    "precache-manifest.64c629e08c5693db1c0a8a31dfffc41d.js": "/my-tabata/precache-manifest.64c629e08c5693db1c0a8a31dfffc41d.js",
+    "service-worker.js": "/my-tabata/service-worker.js",
+    "static/js/2.739a5cd7.chunk.js.LICENSE.txt": "/my-tabata/static/js/2.739a5cd7.chunk.js.LICENSE.txt",
+    "static/media/end.mp3": "/my-tabata/static/media/end.ab8be1a0.mp3",
+    "static/media/logo.png": "/my-tabata/static/media/logo.5d4a4d6f.png",
+    "static/media/prepare.mp3": "/my-tabata/static/media/prepare.9b1549b6.mp3",
+    "static/media/rest.mp3": "/my-tabata/static/media/rest.787cd1bd.mp3",
+    "static/media/run.mp3": "/my-tabata/static/media/run.f5c210b0.mp3",
+    "static/media/work.mp3": "/my-tabata/static/media/work.ff7b361d.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.04489472.js",
+    "static/js/2.739a5cd7.chunk.js",
+    "static/js/main.ef2b9b7d.chunk.js"
+  ]
+}
