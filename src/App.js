@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useCallback } from 'react'
+import Settings from './components/Settings'
+import Timer from './components/Timer'
 
-function App() {
+const App = () => {
+  const [ isStarted, setIsStarted ] = useState(false)
+  const [ data, setData ] = useState([])
+  const onSubmitCallback = useCallback(
+    data => {
+      setIsStarted(true)
+      setData(data)
+    }, [])
+    
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={require('./assets/logo.png')} className="Logo" alt="logo" height="150px"/>
       </header>
+      {isStarted 
+        ? <Timer data={data} />
+        : <Settings onSubmitCallback={onSubmitCallback} />
+      }
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
