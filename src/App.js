@@ -1,6 +1,15 @@
 import React, { useState, useCallback } from 'react'
 import Settings from './components/Settings'
 import Timer from './components/Timer'
+import { BREAKPOINTS } from './theme'
+import styled from 'styled-components'
+
+const StyledLogo = styled.img`
+  height: 150px;
+  @media (max-width: ${BREAKPOINTS.sm}) {
+    height: 90px;
+  }
+`
 
 const App = () => {
   const [ isStarted, setIsStarted ] = useState(false)
@@ -14,7 +23,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={require('./assets/logo.png')} className="Logo" alt="logo" height="150px"/>
+        <StyledLogo src={require('./assets/logo.png')} className="Logo" alt="logo" />
       </header>
       {isStarted 
         ? <Timer data={data} />

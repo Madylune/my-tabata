@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Paper, Typography } from '@material-ui/core'
 import times from 'lodash/fp/times'
+import { BREAKPOINTS } from '../theme'
 
-const StyledWrapper = styled(Paper)`
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledTimer = styled(Paper)`
   && {
     height: 300px;
     width: 400px;
@@ -12,7 +18,21 @@ const StyledWrapper = styled(Paper)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     background-color: ${props => setBgColor(props.title)};
+
+    @media (max-width: ${BREAKPOINTS.sm}) {
+      width: 70%;
+      height: 250px;
+    }
+  }
+`
+
+const StyledText = styled(Typography)`
+  && {
+    @media (max-width: ${BREAKPOINTS.sm}) {
+      font-size: 20px;
+    }
   }
 `
 
@@ -93,9 +113,10 @@ const Timer = ({ data }) => {
     }
   } 
   return (
-    <StyledWrapper title={title}>
-      <Typography variant="h4">Cycle(s) restant(s): {cycleCounter}</Typography>
-      <Typography variant="h4">Exercice(s) restant(s): {exerciseCounter}</Typography>
+    <StyledWrapper>
+      <StyledText variant="h5">Cycle(s) restant(s): {cycleCounter}</StyledText>
+      <StyledText variant="h5">Exercice(s) restant(s): {exerciseCounter}</StyledText>
+    <StyledTimer title={title}>
       <Typography variant="h3">{title}</Typography>
       {title === 'Préparation' && <Typography variant="h1">{prepareCounter}</Typography>}
       {title === 'Effort' && <Typography variant="h1">{workCounter}</Typography>}
@@ -103,6 +124,7 @@ const Timer = ({ data }) => {
       <audio className="Audio"
         src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
       </audio>
+    </StyledTimer>
     </StyledWrapper>
   )
 }

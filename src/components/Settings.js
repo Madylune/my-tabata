@@ -7,21 +7,30 @@ import {
   Typography
 } from '@material-ui/core'
 import toNumber from 'lodash/fp/toNumber'
+import { BREAKPOINTS } from '../theme'
 
 const StyledWrapper = styled(Paper)`
   && {
     width: fit-content;
     margin: auto;
-    padding: 50px;
+    padding: 20px 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: ${BREAKPOINTS.sm}) {
+      padding: 10px 50px;
+    }
   }
 `
 
 const StyledTitle = styled(Typography)`
   && {
     margin-top: 10px;
+    @media (max-width: ${BREAKPOINTS.sm}) {
+      margin-top: 5px;
+      font-size: 21px;
+    }
   }
 `
 
@@ -30,6 +39,11 @@ const StyledInput = styled(Input)`
     height: 50px;
     width: 200px;
     font-size: 23px;
+
+    @media (max-width: ${BREAKPOINTS.sm}) {
+      font-size: 21px;
+      height: 40px;
+    }
   }
 `
 
@@ -40,8 +54,8 @@ const StyledButton = styled(Button)`
 `
 
 const Settings = ({ onSubmitCallback }) => {
-  const [ prepareTime, setPrepareTime ] = useState(0)
-  const [ workTime, setWorkTime ] = useState(10)
+  const [ prepareTime, setPrepareTime ] = useState(5)
+  const [ workTime, setWorkTime ] = useState(30)
   const [ restTime, setRestTime ] = useState(10)
   const [ exerciseTime, setExerciseTime ] = useState(5)
   const [ cycleTime, setCycleTime ] = useState(1)
