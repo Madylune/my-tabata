@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Paper, Typography } from '@material-ui/core'
 import times from 'lodash/fp/times'
+import get from 'lodash/fp/get'
 import { BREAKPOINTS } from '../theme'
 
 const StyledWrapper = styled.div`
@@ -53,8 +54,8 @@ const Timer = ({ data }) => {
   const [ prepareCounter, setPrepareCounter ] = useState(data.prepareTime)
   const [ workCounter, setWorkCounter ] = useState(data.workTime)
   const [ restCounter, setRestCounter ] = useState(data.restTime)
-  const [ exerciseCounter, setExerciseCounter ] = useState(data.exerciseTime)
-  const [ cycleCounter, setCycleCounter ] = useState(data.cycleTime)
+  const [ exerciseCounter, setExerciseCounter ] = useState(data.exerciseNb)
+  const [ cycleCounter, setCycleCounter ] = useState(data.cycleNb)
 
   const [ title, setTitle ] = useState(undefined)
 
@@ -81,7 +82,7 @@ const Timer = ({ data }) => {
             } else {
               setCycleCounter(cycleCounter - 1)
               if (cycleCounter > 1) {
-                setExerciseCounter(data.exerciseTime)
+                setExerciseCounter(data.exerciseNb)
                 setWorkCounter(data.workTime)
                 setRestCounter(data.restTime)
               }
@@ -92,7 +93,7 @@ const Timer = ({ data }) => {
         default:
           setTitle('Terminé')
       }
-    }, data.cycleTime)
+    }, data.cycleNb)
   }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data])
 
   useEffect(() => {
@@ -112,14 +113,24 @@ const Timer = ({ data }) => {
         return 'end'
     }
   } 
+
+  const currentCycle = data.cycleNb - cycleCounter + 1
+  const currentExercise = data.exerciseNb - exerciseCounter + 1
+  const currentExerciseTitle = get(['exercises', currentExercise - 1, 'title'], data)
+
   return (
     <StyledWrapper>
-      <StyledText variant="h5">Cycle(s) restant(s): {cycleCounter}</StyledText>
-      <StyledText variant="h5">Exercice(s) restant(s): {exerciseCounter}</StyledText>
+      <StyledText variant="h5">Cycle: {currentCycle} / {data.cycleNb}</StyledText>
+      <StyledText variant="h5">Exercice: {currentExercise} / {data.exerciseNb}</StyledText>
     <StyledTimer title={title}>
       <Typography variant="h3">{title}</Typography>
       {title === 'Préparation' && <Typography variant="h1">{prepareCounter}</Typography>}
-      {title === 'Effort' && <Typography variant="h1">{workCounter}</Typography>}
+      {title === 'Effort' && (
+        <>
+          <Typography variant="h1">{workCounter}</Typography>
+          <Typography variant="h4">{currentExerciseTitle}</Typography>
+        </>
+      )}
       {title === 'Repos' && <Typography variant="h1">{restCounter}</Typography>}
       <audio className="Audio"
         src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
