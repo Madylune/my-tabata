@@ -97,9 +97,9 @@ const Timer = ({ data }) => {
   }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data])
 
   useEffect(() => {
-    var sound = document.querySelector('.Audio')
-    sound.play()
-  }, [title])
+    var audio = document.querySelector('.Audio')
+    data.sound && audio.play()
+  }, [title, data.sound])
 
   const getSound = title => {
     switch(title) {
@@ -124,17 +124,19 @@ const Timer = ({ data }) => {
       <StyledText variant="h5">Exercice: {currentExercise} / {data.exerciseNb}</StyledText>
     <StyledTimer title={title}>
       <Typography variant="h3">{title}</Typography>
-      {title === 'Préparation' && <Typography variant="h1">{prepareCounter}</Typography>}
+      {title === 'Préparation' && <Typography variant="h1">{prepareCounter}'</Typography>}
       {title === 'Effort' && (
         <>
-          <Typography variant="h1">{workCounter}</Typography>
+          <Typography variant="h1">{workCounter}'</Typography>
           <Typography variant="h4">{currentExerciseTitle}</Typography>
         </>
       )}
-      {title === 'Repos' && <Typography variant="h1">{restCounter}</Typography>}
-      <audio className="Audio"
-        src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
-      </audio>
+      {title === 'Repos' && <Typography variant="h1">{restCounter}'</Typography>}
+      {data.sound && (
+        <audio className="Audio"
+          src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
+        </audio>
+      )}
     </StyledTimer>
     </StyledWrapper>
   )
