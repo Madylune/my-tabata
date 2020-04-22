@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Paper, Typography } from '@material-ui/core'
+import { Paper, Typography, IconButton } from '@material-ui/core'
+import PauseIcon from '@material-ui/icons/Pause'
+import PlayIcon from '@material-ui/icons/PlayArrow'
 import times from 'lodash/fp/times'
 import get from 'lodash/fp/get'
 import { BREAKPOINTS } from '../theme'
@@ -8,6 +10,17 @@ import { BREAKPOINTS } from '../theme'
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+const StyledIconButton = styled(IconButton)`
+  && {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    svg {
+      font-size: 50px;
+    }
+  }
 `
 
 const StyledTimer = styled(Paper)`
@@ -59,21 +72,24 @@ const Timer = ({ data }) => {
 
   const [ title, setTitle ] = useState(undefined)
 
+  const [ pause, setPause ] = useState(false)
+  const handlePause = () => pause ? setPause(false) : setPause(true)
+
   useEffect(() => {
     times(() => {
       switch(true) {
         case prepareCounter > 0:
           setTitle('Préparation')
-          setTimeout(() => setPrepareCounter(prepareCounter - 1), 1000)
+          setTimeout(() => !pause && setPrepareCounter(prepareCounter - 1), 1000)
           break
 
         case cycleCounter > 0:
           if (workCounter > 0) {
             setTitle('Effort')
-            setTimeout(() => setWorkCounter(workCounter - 1), 1000)
+            setTimeout(() => !pause && setWorkCounter(workCounter - 1), 1000)
           } else if (restCounter > 0) {
             setTitle('Repos')
-            setTimeout(() => setRestCounter(restCounter - 1), 1000)
+            setTimeout(() => !pause && setRestCounter(restCounter - 1), 1000)
           } else {
             setExerciseCounter(exerciseCounter - 1)
             if (exerciseCounter > 1) {
@@ -94,12 +110,13 @@ const Timer = ({ data }) => {
           setTitle('Terminé')
       }
     }, data.cycleNb)
-  }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data])
+  }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data, pause])
 
   useEffect(() => {
     var audio = document.querySelector('.Audio')
     data.sound && audio.play()
-  }, [title, data.sound])
+    pause && audio.pause()
+  }, [title, data.sound, pause])
 
   const getSound = title => {
     switch(title) {
@@ -113,31 +130,35 @@ const Timer = ({ data }) => {
         return 'end'
     }
   } 
-
+  
   const currentCycle = data.cycleNb - cycleCounter + 1
   const currentExercise = data.exerciseNb - exerciseCounter + 1
   const currentExerciseTitle = get(['exercises', currentExercise - 1, 'title'], data)
 
   return (
     <StyledWrapper>
+      <StyledIconButton onClick={handlePause}>
+        {pause ? <PlayIcon /> : <PauseIcon />}
+      </StyledIconButton>
+
       <StyledText variant="h5">Cycle: {currentCycle} / {data.cycleNb}</StyledText>
       <StyledText variant="h5">Exercice: {currentExercise} / {data.exerciseNb}</StyledText>
-    <StyledTimer title={title}>
-      <Typography variant="h3">{title}</Typography>
-      {title === 'Préparation' && <Typography variant="h1">{prepareCounter}'</Typography>}
-      {title === 'Effort' && (
-        <>
-          <Typography variant="h1">{workCounter}'</Typography>
-          <Typography variant="h4">{currentExerciseTitle}</Typography>
-        </>
-      )}
-      {title === 'Repos' && <Typography variant="h1">{restCounter}'</Typography>}
-      {data.sound && (
-        <audio className="Audio"
-          src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
-        </audio>
-      )}
-    </StyledTimer>
+      <StyledTimer title={title}>
+        <Typography variant="h3">{title}</Typography>
+        {title === 'Préparation' && <Typography variant="h1">{prepareCounter}'</Typography>}
+        {title === 'Effort' && (
+          <>
+            <Typography variant="h1">{workCounter}'</Typography>
+            <Typography variant="h4">{currentExerciseTitle}</Typography>
+          </>
+        )}
+        {title === 'Repos' && <Typography variant="h1">{restCounter}'</Typography>}
+        {data.sound && (
+          <audio className="Audio"
+            src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
+          </audio>
+        )}
+      </StyledTimer>
     </StyledWrapper>
   )
 }
