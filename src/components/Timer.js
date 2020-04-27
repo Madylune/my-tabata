@@ -25,15 +25,18 @@ const StyledIconButton = styled(IconButton)`
 
 const StyledTimer = styled(Paper)`
   && {
-    height: 300px;
-    width: 400px;
-    margin: auto;
+    height: 350px;
+    width: 350px;
+    border-radius: 50%;
+    border: 3px solid ${props => setColor(props.title)};
+    margin: 20px auto;
     padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: ${props => setBgColor(props.title)};
+    color: ${props => setColor(props.title)};
+    text-align: center;
 
     @media (max-width: ${BREAKPOINTS.sm}) {
       width: 70%;
@@ -44,22 +47,29 @@ const StyledTimer = styled(Paper)`
 
 const StyledText = styled(Typography)`
   && {
+    color: #525252;
     @media (max-width: ${BREAKPOINTS.sm}) {
       font-size: 20px;
     }
   }
 `
 
-const setBgColor = title => {
+const StyledExerciceTitle = styled.div`
+  margin-top: 20px;
+  text-align: center;
+  color: #525252;
+`
+
+const setColor = title => {
   switch (title) {
     case 'Préparation':
-      return '#82ffcf'
+      return '#41d29a'
     case 'Effort':
-      return '#ffc8a8'
+      return '#f7ad82'
     case 'Repos':
-      return '#e0d6ff'
+      return '#ae96f9'
     default:
-      return '#ffffff'
+      return '#525252'
   }
 }
 
@@ -134,6 +144,7 @@ const Timer = ({ data }) => {
   const currentCycle = data.cycleNb - cycleCounter + 1
   const currentExercise = data.exerciseNb - exerciseCounter + 1
   const currentExerciseTitle = get(['exercises', currentExercise - 1, 'title'], data)
+  const nextExerciseTitle = get(['exercises', currentExercise, 'title'], data)
 
   return (
     <StyledWrapper>
@@ -144,21 +155,21 @@ const Timer = ({ data }) => {
       <StyledText variant="h5">Cycle: {currentCycle} / {data.cycleNb}</StyledText>
       <StyledText variant="h5">Exercice: {currentExercise} / {data.exerciseNb}</StyledText>
       <StyledTimer title={title}>
-        <Typography variant="h3">{title}</Typography>
-        {title === 'Préparation' && <Typography variant="h1">{prepareCounter}'</Typography>}
+        <Typography variant="h3">{title === 'Effort' ? currentExerciseTitle || title : title}</Typography>
+        {title === 'Préparation' && <Typography variant="h1">{prepareCounter}</Typography>}
         {title === 'Effort' && (
-          <>
-            <Typography variant="h1">{workCounter}'</Typography>
-            <Typography variant="h4">{currentExerciseTitle}</Typography>
-          </>
+            <Typography variant="h1">{workCounter}</Typography>
         )}
-        {title === 'Repos' && <Typography variant="h1">{restCounter}'</Typography>}
+        {title === 'Repos' && <Typography variant="h1">{restCounter}</Typography>}
         {data.sound && (
           <audio className="Audio"
             src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
           </audio>
         )}
       </StyledTimer>
+      <StyledExerciceTitle>
+        {title === 'Repos' && nextExerciseTitle && <Typography variant="h4">A suivre: {nextExerciseTitle}</Typography>}
+      </StyledExerciceTitle>
     </StyledWrapper>
   )
 }

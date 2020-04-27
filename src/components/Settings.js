@@ -26,6 +26,10 @@ import ExercicesModal from './Exercises'
 const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
+  @media (max-width: ${BREAKPOINTS.sm}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const StyledWrapper = styled(Paper)`
@@ -85,6 +89,10 @@ const StyledButton = styled(Button)`
 
 const StyledExercises = styled.div`
   margin-left: 50px;
+  @media (max-width: ${BREAKPOINTS.sm}) {
+    margin-left: 0px;
+    margin-top: 50px;
+  }
 `
 
 const StyledExercise = styled.div``
