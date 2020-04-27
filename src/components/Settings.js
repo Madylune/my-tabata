@@ -31,7 +31,7 @@ const StyledContainer = styled.div`
 const StyledWrapper = styled(Paper)`
   && {
     width: fit-content;
-    padding: 20px 50px 10px;
+    padding: 20px 50px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
