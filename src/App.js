@@ -4,6 +4,12 @@ import Timer from './components/Timer'
 import { BREAKPOINTS } from './theme'
 import styled from 'styled-components'
 
+const StyledHeader = styled.div`
+  @media (max-width: ${BREAKPOINTS.sm}) {
+    display: ${props => props.isStarted ? 'none' : undefined};
+  }
+`
+
 const StyledLogo = styled.img`
   height: 150px;
   @media (max-width: ${BREAKPOINTS.sm}) {
@@ -22,9 +28,9 @@ const App = () => {
     
   return (
     <div className="App">
-      <header className="App-header">
+      <StyledHeader className="App-header" isStarted={isStarted}>
         <StyledLogo src={require('./assets/logo.png')} className="Logo" alt="logo" />
-      </header>
+      </StyledHeader>
       {isStarted 
         ? <Timer data={data} />
         : <Settings onSubmitCallback={onSubmitCallback} />

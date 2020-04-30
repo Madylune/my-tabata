@@ -168,7 +168,7 @@ const Timer = ({ data }) => {
         )}
       </StyledTimer>
       <StyledExerciceTitle>
-        {title === 'Repos' && nextExerciseTitle && <Typography variant="h4">A suivre: {nextExerciseTitle}</Typography>}
+        {title === 'Repos' && nextExerciseTitle && <Typography variant="h4">À suivre: {nextExerciseTitle}</Typography>}
       </StyledExerciceTitle>
     </StyledWrapper>
   )
