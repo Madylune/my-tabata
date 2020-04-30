@@ -123,9 +123,11 @@ const Timer = ({ data }) => {
   }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data, pause])
 
   useEffect(() => {
-    var audio = document.querySelector('.Audio')
-    data.sound && audio.play()
-    pause && audio.pause()
+    if (data.sound) {
+      var audio = document.querySelector('.Audio')
+      audio.play()
+      pause && audio.pause()
+    } 
   }, [title, data.sound, pause])
 
   const getSound = title => {
