@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Paper, Typography, IconButton } from '@material-ui/core'
+import { Typography, IconButton, CircularProgress } from '@material-ui/core'
 import PauseIcon from '@material-ui/icons/Pause'
 import PlayIcon from '@material-ui/icons/PlayArrow'
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
+import AutorenewIcon from '@material-ui/icons/Autorenew'
 import times from 'lodash/fp/times'
 import get from 'lodash/fp/get'
 import { BREAKPOINTS } from '../theme'
@@ -10,54 +12,80 @@ import { BREAKPOINTS } from '../theme'
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+`
+
+const StyledInfos = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
 `
 
 const StyledIconButton = styled(IconButton)`
   && {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    margin-top: 10px;
     svg {
-      font-size: 50px;
+      font-size: 80px;
     }
   }
 `
 
-const StyledTimer = styled(Paper)`
+const StyledTimer = styled.div`
   && {
-    height: 350px;
-    width: 350px;
-    border-radius: 50%;
-    border: 3px solid ${props => setColor(props.title)};
-    margin: 20px auto;
-    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    color: ${props => setColor(props.title)};
     text-align: center;
-
-    @media (max-width: ${BREAKPOINTS.sm}) {
-      width: 70%;
-      height: 250px;
-    }
   }
 `
+
+const StyledTitle = styled(Typography)`
+  && {
+    margin: 10px auto 20px;
+    color: ${props => setColor(props.title)};
+  }
+` 
 
 const StyledText = styled(Typography)`
   && {
     color: #525252;
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
     @media (max-width: ${BREAKPOINTS.sm}) {
       font-size: 20px;
     }
   }
 `
 
-const StyledExerciceTitle = styled.div`
-  margin-top: 20px;
+const StyledCircleWrapper = styled.div`
+  margin: auto;
+  position: relative;
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 6px 3px rgba(0,0,0,0.1);
   text-align: center;
-  color: #525252;
+`
+
+const StyledCircularProgress = styled(CircularProgress)`
+  && {
+    position: absolute;
+    color: ${props => setColor(props.title)};
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+`
+
+const StyledNumber = styled(Typography)`
+  && {
+    margin-top: 27%;
+    font-size: 8rem;
+    color: #525252;
+  }
 `
 
 const setColor = title => {
@@ -146,32 +174,74 @@ const Timer = ({ data }) => {
   const currentCycle = data.cycleNb - cycleCounter + 1
   const currentExercise = data.exerciseNb - exerciseCounter + 1
   const currentExerciseTitle = get(['exercises', currentExercise - 1, 'title'], data)
-  const nextExerciseTitle = get(['exercises', currentExercise, 'title'], data)
+
+  const getTimer = title => {
+    switch (title) {
+      case 'Préparation':
+        return prepareCounter
+      case 'Effort':
+        return workCounter
+      case 'Repos':
+        return restCounter
+      default:
+        return 0
+    }
+  }
+
+  const getMax = title => {
+    switch (title) {
+      case 'Préparation':
+        return data.prepareTime
+      case 'Effort':
+        return data.workTime
+      case 'Repos':
+        return data.restTime
+      default:
+        return 0
+    }
+  }
+
+  const MIN = 0
+  const MAX = getMax(title)
+  const normaliseCountdown = value => (value - MIN) * 100 / (MAX - MIN)
 
   return (
     <StyledWrapper>
+      <StyledTimer>
+        <StyledTitle variant="h3" title={title}>
+          {title === 'Effort' ? currentExerciseTitle || title : title}
+        </StyledTitle>
+        <StyledCircleWrapper>
+          <StyledCircularProgress 
+            size={350}
+            thickness={2}
+            variant="static" 
+            value={normaliseCountdown(getTimer(title))} 
+            title={title}
+          />
+          <StyledNumber variant="h1">{getTimer(title)}</StyledNumber>
+          <StyledInfos>
+            <StyledText variant="h5">
+              <AutorenewIcon className="Icon" />
+              {currentCycle} / {data.cycleNb}
+            </StyledText>
+            <StyledText variant="h5">
+              <FitnessCenterIcon className="Icon" /> 
+              {currentExercise} / {data.exerciseNb}
+            </StyledText>
+          </StyledInfos>
+        </StyledCircleWrapper>
+      </StyledTimer>
+
+      {data.sound && (
+        <audio className="Audio"
+          src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
+        </audio>
+      )}
+
       <StyledIconButton onClick={handlePause}>
         {pause ? <PlayIcon /> : <PauseIcon />}
       </StyledIconButton>
-
-      <StyledText variant="h5">Cycle: {currentCycle} / {data.cycleNb}</StyledText>
-      <StyledText variant="h5">Exercice: {currentExercise} / {data.exerciseNb}</StyledText>
-      <StyledTimer title={title}>
-        <Typography variant="h3">{title === 'Effort' ? currentExerciseTitle || title : title}</Typography>
-        {title === 'Préparation' && <Typography variant="h1">{prepareCounter}</Typography>}
-        {title === 'Effort' && (
-            <Typography variant="h1">{workCounter}</Typography>
-        )}
-        {title === 'Repos' && <Typography variant="h1">{restCounter}</Typography>}
-        {data.sound && (
-          <audio className="Audio"
-            src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
-          </audio>
-        )}
-      </StyledTimer>
-      <StyledExerciceTitle>
-        {title === 'Repos' && nextExerciseTitle && <Typography variant="h4">À suivre: {nextExerciseTitle}</Typography>}
-      </StyledExerciceTitle>
     </StyledWrapper>
   )
 }
