@@ -1,29 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import {
-  Modal,
-  Button,
-  Input,
-  Typography
-} from '@material-ui/core'
+import { Paper, Button, Input, Typography } from '@material-ui/core'
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
 import times from 'lodash/fp/times'
 import map from 'lodash/fp/map'
 import toPairs from 'lodash/fp/toPairs'
+import isEmpty from 'lodash/fp/isEmpty'
+import get from 'lodash/fp/get'
 import { BREAKPOINTS } from '../theme'
 
-const StyledContent = styled.div`
-  border-radius: 5px;
-  background-color: #ffffff;
-  margin: 50px auto;
+const StyledPaper = styled(Paper)`
+  margin: 0 20px 20px;
   height: 450px;
-  width: 400px;
+  width: 250px;
+  padding: 20px 50px 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
   @media (max-width: ${BREAKPOINTS.sm}) {
-    width: 90%;
+    width: 70%;
   }
 `
 
@@ -41,7 +38,19 @@ const StyledInput = styled(Input)`
   }
 `
 
-const Exercices = ({ open, handleClose, exerciseNb, handleExercises, exercises }) => {
+const StyledExercise = styled(Typography)`
+  && {
+    margin: 10px 0;
+    width: 250px;
+    display: flex;
+    align-items: center;
+  }
+  .Icon {
+    margin-right: 10px;
+  }
+`
+
+const Exercices = ({ exerciseNb, handleExercises, exercises }) => {
   const [ state, setState ] = useState({})
   const handleChange = e => 
     setState({
@@ -57,30 +66,45 @@ const Exercices = ({ open, handleClose, exerciseNb, handleExercises, exercises }
     }), exos)
 
     handleExercises(exercicesList)
-    handleClose()
+  }
+
+  const [ isEdited, setIsEdited ] = useState(false)
+  useEffect(() => {
+    if (!isEmpty(exercises)) {
+      setIsEdited(true)
+    }
+  }, [exercises])
+
+  const onEdit = () => {
+    setIsEdited(false)
   }
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <StyledContent>
-        <Typography variant="h5">Nommer les exercices</Typography>
-        <StyledExercices>
-          {times(exercise => 
+    <StyledPaper elevation={3}>
+      <Typography variant="h5">Mes exercices</Typography>
+      <StyledExercices>
+        {isEdited
+          ? map(exercise => 
+            <StyledExercise key={exercise.id} variant="body1">
+              <FitnessCenterIcon className="Icon" />
+              {exercise.title}
+            </StyledExercise>
+          ,exercises)
+          : times(exercise => 
             <StyledInput 
               key={exercise} 
               placeholder={`Exercice n°${exercise + 1}`}  
               name={`Exercise${exercise + 1}`}
               onChange={handleChange}
+              defaultValue={get([exercise, 'title'], exercises)}
             />
-            , exerciseNb
-          )} 
-        </StyledExercices>
+            , exerciseNb)} 
+      </StyledExercices>
 
-        <Button variant="contained" color="primary" size="large" onClick={onSubmit}>
-          Valider
-        </Button>
-      </StyledContent>
-    </Modal>
+      <Button variant="contained" color="primary" size="large" onClick={isEdited ? onEdit : onSubmit}>
+        {isEdited ? 'Modifier' : 'Valider'}
+      </Button>
+    </StyledPaper>
   )
 }
 
