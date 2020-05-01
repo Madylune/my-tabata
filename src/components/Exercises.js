@@ -75,9 +75,7 @@ const Exercices = ({ exerciseNb, handleExercises, exercises }) => {
     }
   }, [exercises])
 
-  const onEdit = () => {
-    setIsEdited(false)
-  }
+  const onEdit = () => setIsEdited(false)
 
   return (
     <StyledPaper elevation={3}>
