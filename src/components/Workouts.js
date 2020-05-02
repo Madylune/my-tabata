@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/fp/map'
+import round from 'lodash/fp/round'
 import { Paper, Button, Typography } from '@material-ui/core'
+import AlarmIcon from '@material-ui/icons/Alarm'
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
+import AutorenewIcon from '@material-ui/icons/Autorenew'
 import { WORKOUTS } from '../fixtures'
 import { BREAKPOINTS } from '../theme'
 
@@ -39,12 +43,23 @@ const StyledContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+`
+
+const StyledSubtitle = styled(Typography)`
+  && {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+  }
+  .Icon {
+    margin: 0 5px 0 10px;
+  }
 `
 
 const StyledButton = styled(Button)`
   && {
-    margin-top: 10px;
+    margin: 20px auto 10px;
   }
 `
 
@@ -60,18 +75,27 @@ const Workouts = ({ onSubmitCallback }) =>
       Séances pré-programmées
     </Typography>
     <StyledCards>
-      {map(workout => 
-        <StyledCard key={workout.id} elevation={5} image={workout.image}>
-          <StyledContent>
-            <Typography variant="h5">
-              {workout.title}
-            </Typography>
-            <StyledButton variant="contained" color="secondary" onClick={() => onSubmitCallback(workout)}>
-              Démarrer
-            </StyledButton>
-          </StyledContent>
-        </StyledCard>
-      ,WORKOUTS)}
+      {map(workout => {
+        const { exerciseNb, workTime, restTime, title, id, image, cycleNb } = workout
+        const time = ((exerciseNb * (workTime + restTime)) * cycleNb) / 60
+        return (
+          <StyledCard key={id} elevation={5} image={image}>
+            <StyledContent>
+              <Typography variant="h5">
+                {title}
+              </Typography>
+              <StyledSubtitle variant="subtitle2">
+                <AlarmIcon className="Icon" />{round(time)}min
+                <AutorenewIcon className="Icon" />{cycleNb}
+                <FitnessCenterIcon className="Icon" />{exerciseNb}
+              </StyledSubtitle>
+              <StyledButton variant="contained" color="secondary" onClick={() => onSubmitCallback(workout)}>
+                Démarrer
+              </StyledButton>
+            </StyledContent>
+          </StyledCard>
+        )
+      },WORKOUTS)}
     </StyledCards>
   </StyledWrapper>
 

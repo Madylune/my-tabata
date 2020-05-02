@@ -94,5 +94,36 @@ export const WORKOUTS = [
     restTime: 15,
     sound: true,
     workTime: 45
+  },
+  {
+    title: 'Cardio hiit',
+    id: 'cardio1',
+    image: 'cardio.jpg',
+    cycleNb: 3,
+    exerciseNb: 6,
+    exercises: [
+      {
+        title: 'Burpees'
+      },
+      {
+        title: 'Plank Jack'
+      },
+      {
+        title: 'Jump Squat'
+      },
+      {
+        title: 'Mountain Climber'
+      },
+      {
+        title: 'Fentes sautées'
+      },
+      {
+        title: 'Montées de genoux'
+      }
+    ],
+    prepareTime: 10,
+    restTime: 10,
+    sound: true,
+    workTime: 30
   }
 ]
