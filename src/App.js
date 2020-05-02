@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import Settings from './components/Settings'
 import Timer from './components/Timer'
+import Workouts from './components/Workouts'
 import { BREAKPOINTS } from './theme'
 import styled from 'styled-components'
 
@@ -35,6 +36,7 @@ const App = () => {
         ? <Timer data={data} />
         : <Settings onSubmitCallback={onSubmitCallback} />
       }
+      {!isStarted && <Workouts onSubmitCallback={onSubmitCallback} />}
     </div>
   )
 }
