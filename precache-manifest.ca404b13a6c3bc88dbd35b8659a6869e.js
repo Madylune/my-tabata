@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2ab0399e1ecb31a94f7ce34bbf6170d5",
+    "revision": "ba5e45357484e543223e645294ba055b",
     "url": "/my-tabata/index.html"
   },
   {
