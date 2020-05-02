@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Typography, IconButton, CircularProgress } from '@material-ui/core'
+import { Typography, IconButton, CircularProgress, Button } from '@material-ui/core'
 import PauseIcon from '@material-ui/icons/Pause'
 import PlayIcon from '@material-ui/icons/PlayArrow'
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
@@ -88,6 +88,12 @@ const StyledNumber = styled(Typography)`
   }
 `
 
+const StyledHomeButton = styled(Button)`
+  && {
+    margin-top: 30px;
+  }
+`
+
 const setColor = title => {
   switch (title) {
     case 'Préparation':
@@ -156,7 +162,7 @@ const Timer = ({ data }) => {
       audio.play()
       pause && audio.pause()
     } 
-  }, [title, data.sound, pause])
+  }, [title, data.sound, pause, exerciseCounter])
 
   const getSound = title => {
     switch(title) {
@@ -239,9 +245,15 @@ const Timer = ({ data }) => {
         </audio>
       )}
 
-      <StyledIconButton onClick={handlePause}>
-        {pause ? <PlayIcon /> : <PauseIcon />}
-      </StyledIconButton>
+      {title === 'Terminé' ? (
+        <StyledHomeButton variant="contained" color="primary" size="large" onClick={() => document.location.reload(true)}>
+          Accueil
+        </StyledHomeButton>
+      ) : (
+        <StyledIconButton onClick={handlePause}>
+          {pause ? <PlayIcon /> : <PauseIcon />}
+        </StyledIconButton>
+      )}
     </StyledWrapper>
   )
 }
