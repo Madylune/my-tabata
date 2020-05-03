@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/my-tabata/static/js/main.b66fae30.chunk.js",
-    "main.js.map": "/my-tabata/static/js/main.b66fae30.chunk.js.map",
+    "main.js": "/my-tabata/static/js/main.5be062a6.chunk.js",
+    "main.js.map": "/my-tabata/static/js/main.5be062a6.chunk.js.map",
     "runtime-main.js": "/my-tabata/static/js/runtime-main.04489472.js",
     "runtime-main.js.map": "/my-tabata/static/js/runtime-main.04489472.js.map",
-    "static/js/2.66c3c321.chunk.js": "/my-tabata/static/js/2.66c3c321.chunk.js",
-    "static/js/2.66c3c321.chunk.js.map": "/my-tabata/static/js/2.66c3c321.chunk.js.map",
+    "static/js/2.5eaa5b5d.chunk.js": "/my-tabata/static/js/2.5eaa5b5d.chunk.js",
+    "static/js/2.5eaa5b5d.chunk.js.map": "/my-tabata/static/js/2.5eaa5b5d.chunk.js.map",
     "index.html": "/my-tabata/index.html",
-    "precache-manifest.ca404b13a6c3bc88dbd35b8659a6869e.js": "/my-tabata/precache-manifest.ca404b13a6c3bc88dbd35b8659a6869e.js",
+    "precache-manifest.448b7eaf2d97e3de2a5bbb978fd35bc3.js": "/my-tabata/precache-manifest.448b7eaf2d97e3de2a5bbb978fd35bc3.js",
     "service-worker.js": "/my-tabata/service-worker.js",
-    "static/js/2.66c3c321.chunk.js.LICENSE.txt": "/my-tabata/static/js/2.66c3c321.chunk.js.LICENSE.txt",
+    "static/js/2.5eaa5b5d.chunk.js.LICENSE.txt": "/my-tabata/static/js/2.5eaa5b5d.chunk.js.LICENSE.txt",
     "static/media/app1.png": "/my-tabata/static/media/app1.535a5b30.png",
     "static/media/app2.png": "/my-tabata/static/media/app2.b52a17f3.png",
     "static/media/ball.png": "/my-tabata/static/media/ball.e9f7cdb2.png",
@@ -25,7 +25,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.04489472.js",
-    "static/js/2.66c3c321.chunk.js",
-    "static/js/main.b66fae30.chunk.js"
+    "static/js/2.5eaa5b5d.chunk.js",
+    "static/js/main.5be062a6.chunk.js"
   ]
 }
