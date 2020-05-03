@@ -127,3 +127,46 @@ export const WORKOUTS = [
     workTime: 30
   }
 ]
+
+export const VIDEOS = [
+  {
+    title: 'Poignées d\'amour',
+    url: 'https://www.youtube.com/embed/uIGxIbuL6JY'
+  },
+  {
+    title: 'Haut du corps',
+    url: 'https://www.youtube.com/embed/x0mhREjwfrw'
+  },
+  {
+    title: 'Triceps',
+    url: 'https://www.youtube.com/embed/D2hidaJTg2U'
+  },
+  {
+    title: 'Fesses rebondies',
+    url: 'https://www.youtube.com/embed/qHZBKFS_lvk'
+  },
+  {
+    title: 'Bas du ventre',
+    url: 'https://www.youtube.com/embed/JLqWhfQ184s'
+  },
+  {
+    title: 'Cardio',
+    url: 'https://www.youtube.com/embed/M2jm1wiQ_Kc'
+  },
+  { 
+    title: 'Jambes et fessier',
+    url: 'https://www.youtube.com/embed/O6zJdV4nZ4U'
+  },
+  {
+    title: 'Culotte de cheval',
+    url: 'https://www.youtube.com/embed/1T9-0yuxAjE'
+  },
+  {
+    title: 'Dos',
+    url: 'https://www.youtube.com/embed/mXHFRxe7bgo'
+  },
+  {
+    title: 'Pectoraux',
+    url: 'https://www.youtube.com/embed/EAzT-DJxZC0'
+  }
+]
