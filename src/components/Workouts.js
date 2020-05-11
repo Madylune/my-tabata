@@ -15,6 +15,7 @@ const StyledWrapper = styled.div`
 
 const StyledCards = styled.div`
   display: flex;
+  flex-wrap: wrap;
   @media (max-width: ${BREAKPOINTS.sm}) {
     flex-direction: column;
     align-items: center;

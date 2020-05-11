@@ -125,6 +125,92 @@ export const WORKOUTS = [
     restTime: 10,
     sound: true,
     workTime: 30
+  },
+  {
+    title: 'Épaules',
+    id: 'shoulders1',
+    image: 'shoulders.jpeg',
+    cycleNb: 3,
+    exerciseNb: 5,
+    exercises: [
+      {
+        title: 'Élévations latérales'
+      },
+      {
+        title: 'Élévations frontales'
+      },
+      {
+        title: 'Développé militaire'
+      },
+      {
+        title: 'Oiseau'
+      },
+      {
+        title: 'Développé Arnold'
+      }
+    ],
+    prepareTime: 10,
+    restTime: 15,
+    sound: true,
+    workTime: 45
+  },
+  {
+    title: 'Ventre plat',
+    id: 'abs1',
+    image: 'abs1.jpeg',
+    cycleNb: 1,
+    exerciseNb: 15,
+    exercises: [
+      {
+        title: 'Élévation jambes'
+      },
+      {
+        title: 'Gainage planche'
+      },
+      {
+        title: 'Flutter kicks'
+      },
+      {
+        title: 'Gainage latéral (droit)'
+      },
+      {
+        title: 'Gainage latéral (gauche)'
+      },
+      {
+        title: 'Crunch inversé'
+      },
+      {
+        title: 'Gainage planche + rotation du bassin'
+      },
+      {
+        title: 'Portefeuille'
+      },
+      {
+        title: 'Gainage latéral rotation (droit)'
+      },
+      {
+        title: 'Gainage latéral rotation (gauche)'
+      },
+      {
+        title: 'Planche spiderman'
+      },
+      {
+        title: 'Crunch jambes levées'
+      },
+      {
+        title: 'Gainage planche oscillation des pieds'
+      },
+      {
+        title: 'Hollow Rock'
+      },
+      {
+        title: 'Gainage banane'
+      }
+    ],
+    prepareTime: 10,
+    restTime: 0,
+    sound: true,
+    workTime: 30
   }
 ]
 
