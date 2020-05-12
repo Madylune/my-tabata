@@ -4,16 +4,19 @@ export const WORKOUTS = [
     id: 'triceps1',
     image: 'triceps.jpeg',
     cycleNb: 3,
-    exerciseNb: 5,
+    exerciseNb: 6,
     exercises: [
       {
         title: 'Pompes prise serrée'
       },
       {
-        title: 'Extensions verticales'
+        title: 'Haltères au front'
       },
       {
-        title: 'Haltères au front'
+        title: 'Développé haltères prise serrée'
+      },
+      {
+        title: 'Extensions verticales'
       },
       {
         title: 'Kickback'
@@ -25,7 +28,7 @@ export const WORKOUTS = [
     prepareTime: 10,
     restTime: 15,
     sound: true,
-    workTime: 30
+    workTime: 45
   },
   {
     title: 'Culotte de cheval',
@@ -211,7 +214,35 @@ export const WORKOUTS = [
     restTime: 0,
     sound: true,
     workTime: 30
-  }
+  },
+  {
+    title: 'Biceps',
+    id: 'biceps1',
+    image: 'biceps.jpeg',
+    cycleNb: 3,
+    exerciseNb: 5,
+    exercises: [
+      {
+        title: 'Curl haltère unilatéral'
+      },
+      {
+        title: 'curl marteau unilateral'
+      },
+      {
+        title: 'Curl prise pronation'
+      },
+      {
+        title: 'Curl prise large'
+      },
+      {
+        title: 'Curl supination coudes arrières'
+      }
+    ],
+    prepareTime: 10,
+    restTime: 15,
+    sound: true,
+    workTime: 45
+  },
 ]
 
 export const VIDEOS = [

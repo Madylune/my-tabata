@@ -19,7 +19,6 @@ const StyledInfos = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
 `
 
 const StyledIconButton = styled(IconButton)`
@@ -50,10 +49,9 @@ const StyledTitle = styled(Typography)`
 
 const StyledText = styled(Typography)`
   && {
-    color: #525252;
     display: flex;
     align-items: center;
-    margin: 5px 10px;
+    margin: 0 10px;
     @media (max-width: ${BREAKPOINTS.sm}) {
       font-size: 20px;
     }
@@ -65,9 +63,11 @@ const StyledCircleWrapper = styled.div`
   position: relative;
   height: 350px;
   width: 350px;
-  border-radius: 50%;
-  box-shadow: 1px 1px 6px 3px rgba(0,0,0,0.1);
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 `
 
 const StyledCircularProgress = styled(CircularProgress)`
@@ -80,11 +80,18 @@ const StyledCircularProgress = styled(CircularProgress)`
   }
 `
 
+const StyledCircleContent = styled.div`
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  height: 280px;
+  width: 280px;
+  border-radius: 50%;
+`
+
 const StyledNumber = styled(Typography)`
   && {
-    margin-top: 27%;
+    margin-top: 20%;
     font-size: 8rem;
-    color: #525252;
   }
 `
 
@@ -220,22 +227,24 @@ const Timer = ({ data }) => {
         <StyledCircleWrapper>
           <StyledCircularProgress 
             size={350}
-            thickness={2}
+            thickness={4}
             variant="static" 
             value={normaliseCountdown(getTimer(title))} 
             title={title}
           />
-          <StyledNumber variant="h1">{getTimer(title)}</StyledNumber>
-          <StyledInfos>
-            <StyledText variant="h5">
-              <AutorenewIcon className="Icon" />
-              {currentCycle} / {data.cycleNb}
-            </StyledText>
-            <StyledText variant="h5">
-              <FitnessCenterIcon className="Icon" /> 
-              {currentExercise} / {data.exerciseNb}
-            </StyledText>
-          </StyledInfos>
+          <StyledCircleContent>
+            <StyledNumber variant="h1">{getTimer(title)}</StyledNumber>
+            <StyledInfos>
+              <StyledText variant="h5">
+                <AutorenewIcon className="Icon" />
+                {currentCycle} / {data.cycleNb}
+              </StyledText>
+              <StyledText variant="h5">
+                <FitnessCenterIcon className="Icon" /> 
+                {currentExercise} / {data.exerciseNb}
+              </StyledText>
+            </StyledInfos>
+          </StyledCircleContent>
         </StyledCircleWrapper>
       </StyledTimer>
 
