@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "841be1837c86465c194424abd74ff35b",
+    "revision": "e1445b2a70cbeaadbc0591e73491600b",
     "url": "/my-tabata/index.html"
   },
   {
-    "revision": "1f610b660181cea70abc",
-    "url": "/my-tabata/static/js/2.fd529472.chunk.js"
+    "revision": "e9e68e2c402903352993",
+    "url": "/my-tabata/static/js/2.92d3d49f.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/my-tabata/static/js/2.fd529472.chunk.js.LICENSE.txt"
+    "url": "/my-tabata/static/js/2.92d3d49f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9be46f3546b9928cb847",
-    "url": "/my-tabata/static/js/main.bbdf43a7.chunk.js"
+    "revision": "602347796f25e829011f",
+    "url": "/my-tabata/static/js/main.0236f37c.chunk.js"
   },
   {
     "revision": "db19b08e98cc186e63ca",
@@ -34,6 +34,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e9f7cdb2289f8e9db3edc90327f85134",
     "url": "/my-tabata/static/media/ball.e9f7cdb2.png"
+  },
+  {
+    "revision": "973b37e05171ea6d351e0cd05b8240de",
+    "url": "/my-tabata/static/media/biceps.973b37e0.jpeg"
   },
   {
     "revision": "8318409916720cc9da8500c5e171540c",
