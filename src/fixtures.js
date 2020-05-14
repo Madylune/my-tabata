@@ -13,7 +13,7 @@ export const WORKOUTS = [
         title: 'Haltères au front'
       },
       {
-        title: 'Développé haltères prise serrée'
+        title: 'Développé prise serrée'
       },
       {
         title: 'Extensions verticales'
@@ -41,28 +41,28 @@ export const WORKOUTS = [
         title: 'Squat + jambe levée'
       },
       {
-        title: 'Levé de jambe allongé (gauche)'
+        title: 'Levé de jambe allongé (G)'
       },
       {
-        title: 'Levé de jambe allongé (droite)'
+        title: 'Levé de jambe allongé (D)'
       },
       {
-        title: 'Donkey kick (gauche)'
+        title: 'Donkey kick (G)'
       },
       {
-        title: 'Donkey kick (droite)'
+        title: 'Donkey kick (D)'
       },
       {
-        title: 'Rond de jambe allongé (gauche)'
+        title: 'Rond de jambe allongé (G)'
       },
       {
-        title: 'Rond de jambe allongé (droite)'
+        title: 'Rond de jambe allongé (D)'
       },
       {
-        title: 'Levé de jambe latéral à 4 pattes (gauche)'
+        title: 'Donkey kick latéral (G)'
       },
       {
-        title: 'Levé de jambe latéral à 4 pattes (droite)'
+        title: 'Donkey kick latéral (D)'
       }
     ],
     prepareTime: 10,
@@ -81,7 +81,7 @@ export const WORKOUTS = [
         title: 'Gainage planche'
       },
       {
-        title: 'Reverse Jack-knife (flexion des jambes)'
+        title: 'Reverse Jack-knife'
       },
       {
         title: 'Crunch'
@@ -174,25 +174,25 @@ export const WORKOUTS = [
         title: 'Flutter kicks'
       },
       {
-        title: 'Gainage latéral (droit)'
+        title: 'Gainage latéral (D)'
       },
       {
-        title: 'Gainage latéral (gauche)'
+        title: 'Gainage latéral (G)'
       },
       {
         title: 'Crunch inversé'
       },
       {
-        title: 'Gainage planche + rotation du bassin'
+        title: 'Gainage planche + rotation'
       },
       {
         title: 'Portefeuille'
       },
       {
-        title: 'Gainage latéral rotation (droit)'
+        title: 'Gainage latéral rotation (D)'
       },
       {
-        title: 'Gainage latéral rotation (gauche)'
+        title: 'Gainage latéral rotation (G)'
       },
       {
         title: 'Planche spiderman'
@@ -201,7 +201,7 @@ export const WORKOUTS = [
         title: 'Crunch jambes levées'
       },
       {
-        title: 'Gainage planche oscillation des pieds'
+        title: 'Planche + oscillations'
       },
       {
         title: 'Hollow Rock'

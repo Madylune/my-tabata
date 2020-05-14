@@ -8,6 +8,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew'
 import times from 'lodash/fp/times'
 import get from 'lodash/fp/get'
 import { BREAKPOINTS } from '../theme'
+import { getDevice } from '../utils'
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const StyledInfos = styled.div`
 
 const StyledIconButton = styled(IconButton)`
   && {
-    margin-top: 10px;
+    margin-top: ${props => props.isMobile ? 0 : 10}px;
     svg {
       font-size: 80px;
     }
@@ -42,6 +43,7 @@ const StyledTimer = styled.div`
 
 const StyledTitle = styled(Typography)`
   && {
+    height: 50px;
     margin: 10px auto 20px;
     color: ${props => setColor(props.title)};
   }
@@ -59,10 +61,10 @@ const StyledText = styled(Typography)`
 `
 
 const StyledCircleWrapper = styled.div`
-  margin: auto;
+  margin: 10px auto;
   position: relative;
-  height: 350px;
-  width: 350px;
+  height: ${props => props.isMobile ? 300 : 350}px;
+  width: ${props => props.isMobile ? 300 : 350}px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -83,14 +85,14 @@ const StyledCircularProgress = styled(CircularProgress)`
 const StyledCircleContent = styled.div`
   position: absolute;
   background-color: rgba(0,0,0,0.5);
-  height: 280px;
-  width: 280px;
+  height: ${props => props.isMobile ? 240 : 280}px;
+  width: ${props => props.isMobile ? 240 : 280}px;
   border-radius: 50%;
 `
 
 const StyledNumber = styled(Typography)`
   && {
-    margin-top: 20%;
+    margin-top: ${props => props.isMobile ? 15 : 20}%;
     font-size: 8rem;
   }
 `
@@ -176,7 +178,7 @@ const Timer = ({ data }) => {
       case 'Préparation':
         return 'prepare'
       case 'Effort':
-        return 'run'
+        return 'work'
       case 'Repos':
         return 'rest'
       default:
@@ -218,22 +220,26 @@ const Timer = ({ data }) => {
   const MAX = getMax(title)
   const normaliseCountdown = value => (value - MIN) * 100 / (MAX - MIN)
 
+  const device = getDevice()
+  const isMobile = device === 'mobile'
   return (
     <StyledWrapper>
       <StyledTimer>
-        <StyledTitle variant="h3" title={title}>
+        <StyledTitle variant={isMobile ? 'h4' : 'h3'} title={title}>
           {title === 'Effort' ? currentExerciseTitle || title : title}
         </StyledTitle>
-        <StyledCircleWrapper>
+        <StyledCircleWrapper isMobile={isMobile}>
           <StyledCircularProgress 
-            size={350}
+            size={isMobile ? 300 : 350}
             thickness={4}
             variant="static" 
             value={normaliseCountdown(getTimer(title))} 
             title={title}
           />
-          <StyledCircleContent>
-            <StyledNumber variant="h1">{getTimer(title)}</StyledNumber>
+          <StyledCircleContent isMobile={isMobile}>
+            <StyledNumber isMobile={isMobile} variant={isMobile ? 'h3' : 'h1'}>
+              {getTimer(title)}
+            </StyledNumber>
             <StyledInfos>
               <StyledText variant="h5">
                 <AutorenewIcon className="Icon" />
@@ -259,7 +265,7 @@ const Timer = ({ data }) => {
           Accueil
         </StyledHomeButton>
       ) : (
-        <StyledIconButton onClick={handlePause}>
+        <StyledIconButton isMobile={isMobile} onClick={handlePause}>
           {pause ? <PlayIcon /> : <PauseIcon />}
         </StyledIconButton>
       )}
