@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e1445b2a70cbeaadbc0591e73491600b",
+    "revision": "dce8e743d2c6e670be853ba1d73558d7",
     "url": "/my-tabata/index.html"
   },
   {
-    "revision": "e9e68e2c402903352993",
-    "url": "/my-tabata/static/js/2.92d3d49f.chunk.js"
+    "revision": "149882113e78b584f8b7",
+    "url": "/my-tabata/static/js/2.bd296e98.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/my-tabata/static/js/2.92d3d49f.chunk.js.LICENSE.txt"
+    "url": "/my-tabata/static/js/2.bd296e98.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "602347796f25e829011f",
-    "url": "/my-tabata/static/js/main.0236f37c.chunk.js"
+    "revision": "718b7dadedced445519f",
+    "url": "/my-tabata/static/js/main.a795d743.chunk.js"
   },
   {
     "revision": "db19b08e98cc186e63ca",
@@ -30,6 +30,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b52a17f30fdd05610a7a259fee206269",
     "url": "/my-tabata/static/media/app2.b52a17f3.png"
+  },
+  {
+    "revision": "3234787ecb82cc8eb7f619def09c4096",
+    "url": "/my-tabata/static/media/back.3234787e.jpg"
   },
   {
     "revision": "e9f7cdb2289f8e9db3edc90327f85134",
