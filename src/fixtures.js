@@ -28,7 +28,7 @@ export const WORKOUTS = [
     prepareTime: 10,
     restTime: 15,
     sound: true,
-    workTime: 45
+    workTime: 30
   },
   {
     title: 'Culotte de cheval',
@@ -226,7 +226,7 @@ export const WORKOUTS = [
         title: 'Curl haltère unilatéral'
       },
       {
-        title: 'curl marteau unilateral'
+        title: 'curl marteau unilatéral'
       },
       {
         title: 'Curl prise pronation'
@@ -235,7 +235,7 @@ export const WORKOUTS = [
         title: 'Curl prise large'
       },
       {
-        title: 'Curl supination coudes arrières'
+        title: 'Curl coudes arrières'
       }
     ],
     prepareTime: 10,
@@ -243,6 +243,40 @@ export const WORKOUTS = [
     sound: true,
     workTime: 45
   },
+  {
+    title: 'Dorsaux',
+    id: 'back1',
+    image: 'back.jpg',
+    cycleNb: 3,
+    exerciseNb: 6,
+    exercises: [
+      {
+        title: 'Tirage bûcheron unilatéral'
+      },
+      {
+        title: 'Tirage menton'
+      },
+      {
+        title: 'Superman'
+      },
+      {
+        title: 'Good morning'
+      },
+      {
+        title: 'Owy au sol'
+      },
+      {
+        title: 'Tractions au sol'
+      },
+      {
+        title: 'Tirage coude porte'
+      }
+    ],
+    prepareTime: 10,
+    restTime: 15,
+    sound: true,
+    workTime: 45
+  }
 ]
 
 export const VIDEOS = [
