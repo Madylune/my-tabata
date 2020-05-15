@@ -251,7 +251,10 @@ export const WORKOUTS = [
     exerciseNb: 6,
     exercises: [
       {
-        title: 'Tirage bûcheron unilatéral'
+        title: 'Tirage bûcheron (D)'
+      },
+      {
+        title: 'Tirage bûcheron (G)'
       },
       {
         title: 'Tirage menton'
