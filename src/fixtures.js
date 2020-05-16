@@ -270,9 +270,6 @@ export const WORKOUTS = [
       },
       {
         title: 'Tractions au sol'
-      },
-      {
-        title: 'Tirage coude porte'
       }
     ],
     prepareTime: 10,

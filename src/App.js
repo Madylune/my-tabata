@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import Settings from './components/Settings'
-import Timer from './components/Timer'
+import Training from './components/Training'
 import Workouts from './components/Workouts'
 import Videos from './components/Videos'
 import { BREAKPOINTS } from './theme'
@@ -47,7 +47,7 @@ const App = () => {
         <StyledLogo src={require('./assets/logo.png')} className="Logo" alt="logo" onClick={() => document.location.reload(true)} />
       </StyledHeader>
       {isStarted 
-        ? <Timer data={data} />
+        ? <Training data={data} />
         : <Settings onSubmitCallback={onSubmitCallback} />
       }
       {!isStarted && (

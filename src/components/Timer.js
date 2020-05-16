@@ -1,64 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { Typography, IconButton, CircularProgress, Button } from '@material-ui/core'
-import PauseIcon from '@material-ui/icons/Pause'
-import PlayIcon from '@material-ui/icons/PlayArrow'
+import { Typography, CircularProgress } from '@material-ui/core'
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter'
 import AutorenewIcon from '@material-ui/icons/Autorenew'
-import times from 'lodash/fp/times'
-import get from 'lodash/fp/get'
 import { BREAKPOINTS } from '../theme'
-import { getDevice } from '../utils'
-
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const StyledInfos = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const StyledIconButton = styled(IconButton)`
-  && {
-    margin-top: ${props => props.isMobile ? 0 : 10}px;
-    svg {
-      font-size: 80px;
-    }
-  }
-`
-
-const StyledTimer = styled.div`
-  && {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    text-align: center;
-  }
-`
-
-const StyledTitle = styled(Typography)`
-  && {
-    height: 50px;
-    margin: 10px auto 20px;
-    color: ${props => setColor(props.title)};
-  }
-` 
-
-const StyledText = styled(Typography)`
-  && {
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
-    @media (max-width: ${BREAKPOINTS.sm}) {
-      font-size: 20px;
-    }
-  }
-`
 
 const StyledCircleWrapper = styled.div`
   margin: 10px auto;
@@ -75,7 +20,7 @@ const StyledCircleWrapper = styled.div`
 const StyledCircularProgress = styled(CircularProgress)`
   && {
     position: absolute;
-    color: ${props => setColor(props.title)};
+    color: ${props => props.timercolor};
     z-index: 1;
     top: 0;
     left: 0;
@@ -84,7 +29,7 @@ const StyledCircularProgress = styled(CircularProgress)`
 
 const StyledCircleContent = styled.div`
   position: absolute;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.6);
   height: ${props => props.isMobile ? 240 : 280}px;
   width: ${props => props.isMobile ? 240 : 280}px;
   border-radius: 50%;
@@ -97,179 +42,53 @@ const StyledNumber = styled(Typography)`
   }
 `
 
-const StyledHomeButton = styled(Button)`
+const StyledInfos = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const StyledText = styled(Typography)`
   && {
-    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    @media (max-width: ${BREAKPOINTS.sm}) {
+      font-size: 20px;
+    }
   }
 `
 
-const setColor = title => {
-  switch (title) {
-    case 'Préparation':
-      return '#41d29a'
-    case 'Effort':
-      return '#f7ad82'
-    case 'Repos':
-      return '#ae96f9'
-    default:
-      return '#525252'
-  }
-}
-
-const Timer = ({ data }) => {
-  const [ prepareCounter, setPrepareCounter ] = useState(data.prepareTime)
-  const [ workCounter, setWorkCounter ] = useState(data.workTime)
-  const [ restCounter, setRestCounter ] = useState(data.restTime)
-  const [ exerciseCounter, setExerciseCounter ] = useState(data.exerciseNb)
-  const [ cycleCounter, setCycleCounter ] = useState(data.cycleNb)
-
-  const [ title, setTitle ] = useState(undefined)
-
-  const [ pause, setPause ] = useState(false)
-  const handlePause = () => pause ? setPause(false) : setPause(true)
-
-  useEffect(() => {
-    times(() => {
-      switch(true) {
-        case prepareCounter > 0:
-          setTitle('Préparation')
-          setTimeout(() => !pause && setPrepareCounter(prepareCounter - 1), 1000)
-          break
-
-        case cycleCounter > 0:
-          if (workCounter > 0) {
-            setTitle('Effort')
-            setTimeout(() => !pause && setWorkCounter(workCounter - 1), 1000)
-          } else if (restCounter > 0) {
-            setTitle('Repos')
-            setTimeout(() => !pause && setRestCounter(restCounter - 1), 1000)
-          } else {
-            setExerciseCounter(exerciseCounter - 1)
-            if (exerciseCounter > 1) {
-              setWorkCounter(data.workTime)
-              setRestCounter(data.restTime)
-            } else {
-              setCycleCounter(cycleCounter - 1)
-              if (cycleCounter > 1) {
-                setExerciseCounter(data.exerciseNb)
-                setWorkCounter(data.workTime)
-                setRestCounter(data.restTime)
-              }
-            }
-          }
-          break
-
-        default:
-          setTitle('Terminé')
-      }
-    }, data.cycleNb)
-  }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data, pause])
-
-  useEffect(() => {
-    if (data.sound) {
-      var audio = document.querySelector('.Audio')
-      audio.play()
-      pause && audio.pause()
-    } 
-  }, [title, data.sound, pause, exerciseCounter])
-
-  const getSound = title => {
-    switch(title) {
-      case 'Préparation':
-        return 'prepare'
-      case 'Effort':
-        return 'work'
-      case 'Repos':
-        return 'rest'
-      default:
-        return 'end'
-    }
-  } 
-  
-  const currentCycle = data.cycleNb - cycleCounter + 1
-  const currentExercise = data.exerciseNb - exerciseCounter + 1
-  const currentExerciseTitle = get(['exercises', currentExercise - 1, 'title'], data)
-
-  const getTimer = title => {
-    switch (title) {
-      case 'Préparation':
-        return prepareCounter
-      case 'Effort':
-        return workCounter
-      case 'Repos':
-        return restCounter
-      default:
-        return 0
-    }
-  }
-
-  const getMax = title => {
-    switch (title) {
-      case 'Préparation':
-        return data.prepareTime
-      case 'Effort':
-        return data.workTime
-      case 'Repos':
-        return data.restTime
-      default:
-        return 0
-    }
-  }
-
+const Timer = ({ timerColor, isMobile, title, currentCycle, currentExercise, cycleNb, exerciseNb, max, timer }) => {
   const MIN = 0
-  const MAX = getMax(title)
-  const normaliseCountdown = value => (value - MIN) * 100 / (MAX - MIN)
+  const normaliseCountdown = value => (value - MIN) * 100 / (max - MIN)
 
-  const device = getDevice()
-  const isMobile = device === 'mobile'
   return (
-    <StyledWrapper>
-      <StyledTimer>
-        <StyledTitle variant={isMobile ? 'h4' : 'h3'} title={title}>
-          {title === 'Effort' ? currentExerciseTitle || title : title}
-        </StyledTitle>
-        <StyledCircleWrapper isMobile={isMobile}>
-          <StyledCircularProgress 
-            size={isMobile ? 300 : 350}
-            thickness={4}
-            variant="static" 
-            value={normaliseCountdown(getTimer(title))} 
-            title={title}
-          />
-          <StyledCircleContent isMobile={isMobile}>
-            <StyledNumber isMobile={isMobile} variant={isMobile ? 'h3' : 'h1'}>
-              {getTimer(title)}
-            </StyledNumber>
-            <StyledInfos>
-              <StyledText variant="h5">
-                <AutorenewIcon className="Icon" />
-                {currentCycle} / {data.cycleNb}
-              </StyledText>
-              <StyledText variant="h5">
-                <FitnessCenterIcon className="Icon" /> 
-                {currentExercise} / {data.exerciseNb}
-              </StyledText>
-            </StyledInfos>
-          </StyledCircleContent>
-        </StyledCircleWrapper>
-      </StyledTimer>
-
-      {data.sound && (
-        <audio className="Audio"
-          src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
-        </audio>
-      )}
-
-      {title === 'Terminé' ? (
-        <StyledHomeButton variant="contained" color="primary" size="large" onClick={() => document.location.reload(true)}>
-          Accueil
-        </StyledHomeButton>
-      ) : (
-        <StyledIconButton isMobile={isMobile} onClick={handlePause}>
-          {pause ? <PlayIcon /> : <PauseIcon />}
-        </StyledIconButton>
-      )}
-    </StyledWrapper>
+    <StyledCircleWrapper isMobile={isMobile}>
+      <StyledCircularProgress 
+        timercolor={timerColor}
+        size={isMobile ? 300 : 350}
+        thickness={4}
+        variant="static" 
+        value={normaliseCountdown(timer)} 
+        title={title}
+      />
+      <StyledCircleContent isMobile={isMobile}>
+        <StyledNumber isMobile={isMobile} variant={isMobile ? 'h3' : 'h1'}>
+          {timer}
+        </StyledNumber>
+        <StyledInfos>
+          <StyledText variant="h5">
+            <AutorenewIcon className="Icon" />
+            {currentCycle} / {cycleNb}
+          </StyledText>
+          <StyledText variant="h5">
+            <FitnessCenterIcon className="Icon" /> 
+            {currentExercise} / {exerciseNb}
+          </StyledText>
+        </StyledInfos>
+      </StyledCircleContent>
+    </StyledCircleWrapper>
   )
 }
 
