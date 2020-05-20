@@ -5,6 +5,8 @@ import Workouts from './components/Workouts'
 import Videos from './components/Videos'
 import { BREAKPOINTS } from './theme'
 import styled from 'styled-components'
+import sample from 'lodash/fp/sample'
+import { MUSICS } from './fixtures'
 
 const StyledApp = styled.div`
   position: relative;
@@ -32,6 +34,8 @@ const StyledSpotify = styled.iframe`
   border: none;
 `
 
+const musicPlaylist = sample(MUSICS)
+
 const App = () => {
   const [ isStarted, setIsStarted ] = useState(false)
   const [ data, setData ] = useState([])
@@ -58,7 +62,7 @@ const App = () => {
       )}
     
       <StyledSpotify 
-        src="https://open.spotify.com/embed/playlist/6uQyxRW4t2otqHVlwfW83o"
+        src={musicPlaylist.url}
         height="80" 
         frameborder="0" 
         allowtransparency="true" 

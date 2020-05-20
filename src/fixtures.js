@@ -321,3 +321,24 @@ export const VIDEOS = [
     url: 'https://www.youtube.com/embed/EAzT-DJxZC0'
   }
 ]
+
+export const MUSICS = [
+  {
+    url: 'https://open.spotify.com/embed/playlist/6uQyxRW4t2otqHVlwfW83o'
+  },
+  {
+    url: 'https://open.spotify.com/embed/album/4yaCFkxG3LG3wJJW94RVX0'
+  },
+  {
+    url: 'https://open.spotify.com/embed/album/3PlVzS23QW29mBaNwiYHT6'
+  },
+  {
+    url: 'https://open.spotify.com/embed/playlist/37i9dQZF1DX76t638V6CA8'
+  },
+  {
+    url: 'https://open.spotify.com/embed/playlist/37i9dQZF1DWSJaGvRwFnf6'
+  },
+  {
+    url: 'https://open.spotify.com/embed/album/0xiQwji9bCPsGxINcmDBbP'
+  }
+]
