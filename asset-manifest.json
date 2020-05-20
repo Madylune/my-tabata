@@ -1,35 +1,36 @@
 {
   "files": {
-    "main.js": "/my-tabata/static/js/main.4d587500.chunk.js",
-    "main.js.map": "/my-tabata/static/js/main.4d587500.chunk.js.map",
+    "main.js": "/my-tabata/static/js/main.91ae4f9b.chunk.js",
+    "main.js.map": "/my-tabata/static/js/main.91ae4f9b.chunk.js.map",
     "runtime-main.js": "/my-tabata/static/js/runtime-main.04489472.js",
     "runtime-main.js.map": "/my-tabata/static/js/runtime-main.04489472.js.map",
-    "static/js/2.1a59af75.chunk.js": "/my-tabata/static/js/2.1a59af75.chunk.js",
-    "static/js/2.1a59af75.chunk.js.map": "/my-tabata/static/js/2.1a59af75.chunk.js.map",
+    "static/js/2.20093d80.chunk.js": "/my-tabata/static/js/2.20093d80.chunk.js",
+    "static/js/2.20093d80.chunk.js.map": "/my-tabata/static/js/2.20093d80.chunk.js.map",
     "index.html": "/my-tabata/index.html",
-    "precache-manifest.7a1af140fe29bbba2acbcbcb6a41c104.js": "/my-tabata/precache-manifest.7a1af140fe29bbba2acbcbcb6a41c104.js",
+    "precache-manifest.aa0a1b0553d99e2e6e38dc7e44f2fcd0.js": "/my-tabata/precache-manifest.aa0a1b0553d99e2e6e38dc7e44f2fcd0.js",
     "service-worker.js": "/my-tabata/service-worker.js",
-    "static/js/2.1a59af75.chunk.js.LICENSE.txt": "/my-tabata/static/js/2.1a59af75.chunk.js.LICENSE.txt",
+    "static/js/2.20093d80.chunk.js.LICENSE.txt": "/my-tabata/static/js/2.20093d80.chunk.js.LICENSE.txt",
     "static/media/abs1.jpeg": "/my-tabata/static/media/abs1.277fd0e2.jpeg",
     "static/media/app1.png": "/my-tabata/static/media/app1.535a5b30.png",
     "static/media/app2.png": "/my-tabata/static/media/app2.b52a17f3.png",
     "static/media/back.jpg": "/my-tabata/static/media/back.3234787e.jpg",
     "static/media/ball.png": "/my-tabata/static/media/ball.e9f7cdb2.png",
+    "static/media/bell.mp3": "/my-tabata/static/media/bell.9e15ad7f.mp3",
     "static/media/biceps.jpeg": "/my-tabata/static/media/biceps.973b37e0.jpeg",
     "static/media/cardio.jpg": "/my-tabata/static/media/cardio.83184099.jpg",
     "static/media/culotte.jpeg": "/my-tabata/static/media/culotte.2527204c.jpeg",
     "static/media/end.mp3": "/my-tabata/static/media/end.ab8be1a0.mp3",
+    "static/media/go.mp3": "/my-tabata/static/media/go.98abb132.mp3",
     "static/media/logo.png": "/my-tabata/static/media/logo.5d4a4d6f.png",
     "static/media/prepare.mp3": "/my-tabata/static/media/prepare.9b1549b6.mp3",
     "static/media/rest.mp3": "/my-tabata/static/media/rest.787cd1bd.mp3",
-    "static/media/run.mp3": "/my-tabata/static/media/run.f5c210b0.mp3",
     "static/media/shoulders.jpeg": "/my-tabata/static/media/shoulders.4a338ffe.jpeg",
     "static/media/triceps.jpeg": "/my-tabata/static/media/triceps.40439867.jpeg",
     "static/media/work.mp3": "/my-tabata/static/media/work.ff7b361d.mp3"
   },
   "entrypoints": [
     "static/js/runtime-main.04489472.js",
-    "static/js/2.1a59af75.chunk.js",
-    "static/js/main.4d587500.chunk.js"
+    "static/js/2.20093d80.chunk.js",
+    "static/js/main.91ae4f9b.chunk.js"
   ]
 }
