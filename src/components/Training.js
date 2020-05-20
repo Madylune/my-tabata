@@ -61,11 +61,12 @@ const setColor = title => {
 }
 
 const Training = ({ data }) => {
-  const [ prepareCounter, setPrepareCounter ] = useState(data.prepareTime)
-  const [ workCounter, setWorkCounter ] = useState(data.workTime)
-  const [ restCounter, setRestCounter ] = useState(data.restTime)
-  const [ exerciseCounter, setExerciseCounter ] = useState(data.exerciseNb)
-  const [ cycleCounter, setCycleCounter ] = useState(data.cycleNb)
+  const { prepareTime, workTime, restTime, exerciseNb, cycleNb, sound, exercises } = data
+  const [ prepareCounter, setPrepareCounter ] = useState(prepareTime)
+  const [ workCounter, setWorkCounter ] = useState(workTime)
+  const [ restCounter, setRestCounter ] = useState(restTime)
+  const [ exerciseCounter, setExerciseCounter ] = useState(exerciseNb)
+  const [ cycleCounter, setCycleCounter ] = useState(cycleNb)
 
   const [ title, setTitle ] = useState(undefined)
 
@@ -84,20 +85,22 @@ const Training = ({ data }) => {
           if (workCounter > 0) {
             setTitle('Effort')
             setTimeout(() => !pause && setWorkCounter(workCounter - 1), 1000)
-          } else if (restCounter > 0) {
-            setTitle('Repos')
-            setTimeout(() => !pause && setRestCounter(restCounter - 1), 1000)
           } else {
-            setExerciseCounter(exerciseCounter - 1)
-            if (exerciseCounter > 1) {
-              setWorkCounter(data.workTime)
-              setRestCounter(data.restTime)
+            if (restCounter > 0) {
+              setTitle('Repos')
+              setTimeout(() => !pause && setRestCounter(restCounter - 1), 1000)
             } else {
-              setCycleCounter(cycleCounter - 1)
-              if (cycleCounter > 1) {
-                setExerciseCounter(data.exerciseNb)
-                setWorkCounter(data.workTime)
-                setRestCounter(data.restTime)
+              setExerciseCounter(exerciseCounter - 1)
+              if (exerciseCounter > 1) {
+                setWorkCounter(workTime)
+                setRestCounter(restTime)
+              } else {
+                setCycleCounter(cycleCounter - 1)
+                if (cycleCounter > 1) {
+                  setExerciseCounter(exerciseNb)
+                  setWorkCounter(workTime)
+                  setRestCounter(restTime)
+                }
               }
             }
           }
@@ -106,42 +109,42 @@ const Training = ({ data }) => {
         default:
           setTitle('Terminé')
       }
-    }, data.cycleNb)
-  }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, data, pause])
+    }, cycleNb)
+  }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, pause, workTime, cycleNb, exerciseNb, restTime])
 
   useEffect(() => {
-    if (data.sound) {
+    if (sound) {
       var audio = document.querySelector('.Audio')
       audio.play()
       pause && audio.pause()
     } 
-  }, [title, data.sound, pause, exerciseCounter])
+  }, [title, sound, pause, exerciseCounter])
 
   const getSound = title => {
     switch(title) {
       case 'Préparation':
         return 'prepare'
       case 'Effort':
-        return 'work'
+        return 'go'
       case 'Repos':
-        return 'rest'
+        return 'bell'
       default:
         return 'end'
     }
   } 
   
-  const currentCycle = data.cycleNb - cycleCounter + 1
-  const currentExercise = data.exerciseNb - exerciseCounter + 1
-  const currentExerciseTitle = get(['exercises', currentExercise - 1, 'title'], data)
+  const currentCycle = cycleNb - cycleCounter + 1
+  const currentExercise = exerciseNb - exerciseCounter + 1
+  const currentExerciseTitle = get([currentExercise - 1, 'title'], exercises)
 
   const getMax = title => {
     switch (title) {
       case 'Préparation':
-        return data.prepareTime
+        return prepareTime
       case 'Effort':
-        return data.workTime
+        return workTime
       case 'Repos':
-        return data.restTime
+        return restTime
       default:
         return 0
     }
@@ -174,14 +177,14 @@ const Training = ({ data }) => {
           title={title}
           currentCycle={currentCycle}
           currentExercise={currentExercise}
-          cycleNb={data.cycleNb}
-          exerciseNb={data.exerciseNb}
+          cycleNb={cycleNb}
+          exerciseNb={exerciseNb}
           max={getMax(title)}
           timer={getTimer(title)}
         />
       </StyledTimer>
 
-      {data.sound && (
+      {sound && (
         <audio className="Audio"
           src={require(`../assets/sounds/${getSound(title)}.mp3`)}>
         </audio>
