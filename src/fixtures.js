@@ -16,13 +16,13 @@ export const WORKOUTS = [
         title: 'Développé prise serrée'
       },
       {
+        title: 'Dips'
+      },
+      {
         title: 'Extensions verticales'
       },
       {
         title: 'Kickback'
-      },
-      {
-        title: 'Dips'
       }
     ],
     prepareTime: 10,
@@ -248,7 +248,7 @@ export const WORKOUTS = [
     id: 'back1',
     image: 'back.jpg',
     cycleNb: 3,
-    exerciseNb: 6,
+    exerciseNb: 8,
     exercises: [
       {
         title: 'Tirage bûcheron (D)'
@@ -260,13 +260,16 @@ export const WORKOUTS = [
         title: 'Tirage menton'
       },
       {
+        title: 'Rowing haltères'
+      },
+      {
         title: 'Superman'
       },
       {
         title: 'Good morning'
       },
       {
-        title: 'Owy au sol'
+        title: 'Tractions élastique'
       },
       {
         title: 'Tractions au sol'
