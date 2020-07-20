@@ -106,10 +106,10 @@ export const WORKOUTS = [
     exerciseNb: 6,
     exercises: [
       {
-        title: 'Burpees'
+        title: 'Montées de genoux'
       },
       {
-        title: 'Plank Jack'
+        title: 'Burpees'
       },
       {
         title: 'Jump Squat'
@@ -118,10 +118,10 @@ export const WORKOUTS = [
         title: 'Mountain Climber'
       },
       {
-        title: 'Fentes sautées'
+        title: 'Jumping Jack'
       },
       {
-        title: 'Montées de genoux'
+        title: 'Plank Jack'
       }
     ],
     prepareTime: 10,
