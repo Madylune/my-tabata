@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Typography, IconButton, Button } from '@material-ui/core'
 import PauseIcon from '@material-ui/icons/Pause'
 import PlayIcon from '@material-ui/icons/PlayArrow'
-import times from 'lodash/fp/times'
 import get from 'lodash/fp/get'
 import { getDevice } from '../utils'
 import Timer from './Timer'
@@ -74,43 +73,58 @@ const Training = ({ data }) => {
   const handlePause = () => pause ? setPause(false) : setPause(true)
 
   useEffect(() => {
-    times(() => {
-      switch(true) {
-        case prepareCounter > 0:
-          setTitle('Préparation')
-          setTimeout(() => !pause && setPrepareCounter(prepareCounter - 1), 1000)
-          break
+    StartPreparationCounter()
+  })
 
-        case cycleCounter > 0:
-          if (workCounter > 0) {
-            setTitle('Effort')
-            setTimeout(() => !pause && setWorkCounter(workCounter - 1), 1000)
-          } else {
-            if (restCounter > 0) {
-              setTitle('Repos')
-              setTimeout(() => !pause && setRestCounter(restCounter - 1), 1000)
-            } else {
-              setExerciseCounter(exerciseCounter - 1)
-              if (exerciseCounter > 1) {
-                setWorkCounter(workTime)
-                setRestCounter(restTime)
-              } else {
-                setCycleCounter(cycleCounter - 1)
-                if (cycleCounter > 1) {
-                  setExerciseCounter(exerciseNb)
-                  setWorkCounter(workTime)
-                  setRestCounter(restTime)
-                }
-              }
-            }
-          }
-          break
+  const StartPreparationCounter = () => {
+    if (prepareCounter > 0) {
+      setTitle('Préparation')
+      setTimeout(() => !pause && setPrepareCounter(prepareCounter - 1), 1000)
+    } else {
+      StartWorkCounter()
+    }
+  }
 
-        default:
-          setTitle('Terminé')
+  const StartWorkCounter = () => {
+    if (workCounter > 0) {
+      setTitle('Effort')
+      setTimeout(() => !pause && setWorkCounter(workCounter - 1), 1000)
+    } else {
+      if (cycleCounter === 1 && exerciseCounter === 1) {
+        StopTraining()
+      } else {
+        StartRestCounter()
       }
-    }, cycleNb)
-  }, [prepareCounter, exerciseCounter, workCounter, restCounter, cycleCounter, pause, workTime, cycleNb, exerciseNb, restTime])
+    }
+  }
+
+  const StartRestCounter = () => {
+    if (restCounter > 0) {
+      setTitle('Repos')
+      setTimeout(() => !pause && setRestCounter(restCounter - 1), 1000)
+    } else {
+      exerciseCounter > 1
+        ? NextExercise()
+        : NextCycle()
+    }
+  }
+
+  const NextExercise = () => {
+    setWorkCounter(workTime)
+    setRestCounter(restTime)
+    setExerciseCounter(exerciseCounter - 1)
+  }
+
+  const NextCycle = () => {
+    setExerciseCounter(exerciseNb)
+    setWorkCounter(workTime)
+    setRestCounter(restTime)
+    setCycleCounter(cycleCounter - 1)
+  }
+
+  const StopTraining = () => {
+    setTitle('Terminé')
+  }
 
   useEffect(() => {
     if (sound) {
